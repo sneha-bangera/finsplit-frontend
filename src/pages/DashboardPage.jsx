@@ -29,10 +29,15 @@ export default function DashboardPage() {
             <div style={cardTitle}>My Expenses</div>
             <div style={cardSub}>Track and manage your personal spending</div>
           </div>
-          <div style={{ ...card, opacity:0.45, cursor:'not-allowed' }}>
+          {/* <div style={{ ...card, opacity:0.45, cursor:'not-allowed' }}>
             <div style={cardIcon}>📊</div>
             <div style={cardTitle}>Budgets</div>
             <div style={cardSub}>Coming in Phase 3</div>
+          </div> */}
+          <div style={card} onClick={() => navigate('/budgets')} role="button">
+            <div style={cardIcon}>📊</div>
+            <div style={cardTitle}>Budgets</div>
+            <div style={cardSub}>Set limits and track spending by category</div>
           </div>
           <div style={{ ...card, opacity:0.45, cursor:'not-allowed' }}>
             <div style={cardIcon}>👥</div>

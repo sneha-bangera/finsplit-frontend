@@ -132,6 +132,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import ExpensesPage from './pages/ExpensesPage';
+import BudgetPage from './pages/BudgetPage';
 
 export default function App() {
   return (
@@ -146,6 +147,9 @@ export default function App() {
           } />
           <Route path="/expenses" element={
             <ProtectedRoute><ExpensesPage /></ProtectedRoute>
+          } />
+          <Route path="/budgets" element={
+            <ProtectedRoute><BudgetPage /></ProtectedRoute>
           } />
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
