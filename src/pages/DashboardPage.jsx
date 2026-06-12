@@ -29,11 +29,6 @@ export default function DashboardPage() {
             <div style={cardTitle}>My Expenses</div>
             <div style={cardSub}>Track and manage your personal spending</div>
           </div>
-          {/* <div style={{ ...card, opacity:0.45, cursor:'not-allowed' }}>
-            <div style={cardIcon}>📊</div>
-            <div style={cardTitle}>Budgets</div>
-            <div style={cardSub}>Coming in Phase 3</div>
-          </div> */}
           <div style={card} onClick={() => navigate('/budgets')} role="button">
             <div style={cardIcon}>📊</div>
             <div style={cardTitle}>Budgets</div>
@@ -44,11 +39,6 @@ export default function DashboardPage() {
             <div style={cardTitle}>Groups</div>
             <div style={cardSub}>Split expenses with friends and track who owes whom</div>
           </div>
-          {/* <div style={{ ...card, opacity:0.45, cursor:'not-allowed' }}>
-            <div style={cardIcon}>👥</div>
-            <div style={cardTitle}>Groups</div>
-            <div style={cardSub}>Coming in Phase 4</div>
-          </div> */}
         </div>
       </div>
     </div>
@@ -60,46 +50,3 @@ const cardIcon = { fontSize:28, marginBottom:10 };
 const cardTitle = { fontSize:'0.95rem', fontWeight:600, color:'#111827', marginBottom:4 };
 const cardSub = { fontSize:'0.8rem', color:'#9ca3af', lineHeight:1.5 };
 
-// import { useNavigate } from 'react-router-dom';
-// import { useAuth } from '../context/AuthContext';
-
-// export default function DashboardPage() {
-//   const { user, logout } = useAuth();
-//   const navigate = useNavigate();
-
-//   const handleLogout = () => {
-//     logout();
-//     navigate('/login');
-//   };
-
-//   return (
-//     <div>
-//       <nav className="navbar">
-//         <span className="navbar-brand">FinSplit</span>
-//         <div className="navbar-right">
-//           <span>{user?.email}</span>
-//           <button className="btn-outline" onClick={handleLogout}>Logout</button>
-//         </div>
-//       </nav>
-
-//       <div className="page-content">
-//         <div className="welcome-card">
-//           <h2>Welcome, {user?.name}!</h2>
-//           <p>Your dashboard is ready. Features are added phase by phase.</p>
-//           <div className="meta-row">
-//             <div className="meta-item">Email: <span>{user?.email}</span></div>
-//             <div className="meta-item">
-//               Member since: <span>
-//                 {user?.createdAt
-//                   ? new Date(user.createdAt).toLocaleDateString('en-IN', {
-//                       year: 'numeric', month: 'long', day: 'numeric'
-//                     })
-//                   : '—'}
-//               </span>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
