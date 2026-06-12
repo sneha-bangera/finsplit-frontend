@@ -39,11 +39,16 @@ export default function DashboardPage() {
             <div style={cardTitle}>Budgets</div>
             <div style={cardSub}>Set limits and track spending by category</div>
           </div>
-          <div style={{ ...card, opacity:0.45, cursor:'not-allowed' }}>
+          <div style={card} onClick={() => navigate('/groups')} role="button">
+            <div style={cardIcon}>👥</div>
+            <div style={cardTitle}>Groups</div>
+            <div style={cardSub}>Split expenses with friends and track who owes whom</div>
+          </div>
+          {/* <div style={{ ...card, opacity:0.45, cursor:'not-allowed' }}>
             <div style={cardIcon}>👥</div>
             <div style={cardTitle}>Groups</div>
             <div style={cardSub}>Coming in Phase 4</div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
