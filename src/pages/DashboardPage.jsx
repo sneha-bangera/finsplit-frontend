@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Navbar from '../components/Navbar';
 
 export default function DashboardPage() {
   const { user, logout } = useAuth();
@@ -9,13 +10,7 @@ export default function DashboardPage() {
 
   return (
     <div>
-      <nav style={{ background:'#fff', borderBottom:'1px solid #e5e7eb', padding:'0 1.5rem', height:60, display:'flex', alignItems:'center', justifyContent:'space-between' }}>
-        <span style={{ fontSize:'1.1rem', fontWeight:700, color:'#6366f1' }}>FinSplit</span>
-        <div style={{ display:'flex', alignItems:'center', gap:12 }}>
-          <span style={{ fontSize:'0.875rem', color:'#6b7280' }}>{user?.email}</span>
-          <button onClick={handleLogout} style={{ padding:'0.4rem 0.9rem', background:'transparent', border:'1px solid #d1d5db', borderRadius:8, fontSize:'0.875rem', cursor:'pointer' }}>Logout</button>
-        </div>
-      </nav>
+      <Navbar/>
 
       <div style={{ maxWidth:860, margin:'2rem auto', padding:'0 1.5rem' }}>
         <div style={{ marginBottom:24 }}>

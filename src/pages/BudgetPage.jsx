@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { setBudget, getAnalytics } from '../services/budgetService';
 import { getCategories } from '../services/expenseService';
+import Navbar from '../components/Navbar';
+import PageWrapper from '../components/PageWrapper';
 
 export default function BudgetPage() {
   const { logout } = useAuth();
@@ -64,17 +66,9 @@ export default function BudgetPage() {
 
   return (
     <div>
-      {/* Navbar */}
-      <nav style={s.nav}>
-        <span style={s.brand} onClick={() => navigate('/dashboard')} role="button">FinSplit</span>
-        <div style={s.navLinks}>
-          <span style={s.navLink} onClick={() => navigate('/expenses')}>Expenses</span>
-          <span style={s.navActive}>Budgets</span>
-          <button style={s.logoutBtn} onClick={handleLogout}>Logout</button>
-        </div>
-      </nav>
+      <Navbar/>
 
-      <div style={s.page}>
+      <PageWrapper>
 
         {/* ── Monthly spend chart ─────────────────── */}
         <div style={s.card}>
@@ -157,7 +151,7 @@ export default function BudgetPage() {
             ))}
           </div>
         )}
-      </div>
+      </PageWrapper>
 
       {/* Set budget modal */}
       {showForm && (

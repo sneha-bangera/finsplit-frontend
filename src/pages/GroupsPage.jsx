@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth } from '../context/AuthContext';
 import { getMyGroups, createGroup } from '../services/groupService';
+import Navbar from '../components/Navbar';
+import PageWrapper from '../components/PageWrapper';
+
 
 export default function GroupsPage() {
   const { logout, user } = useAuth();
@@ -49,17 +52,9 @@ export default function GroupsPage() {
 
   return (
     <div>
-      <nav style={s.nav}>
-        <span style={s.brand} onClick={() => navigate('/dashboard')} role="button">FinSplit</span>
-        <div style={s.navLinks}>
-          <span style={s.navLink} onClick={() => navigate('/expenses')}>Expenses</span>
-          <span style={s.navLink} onClick={() => navigate('/budgets')}>Budgets</span>
-          <span style={s.navActive}>Groups</span>
-          <button style={s.logoutBtn} onClick={handleLogout}>Logout</button>
-        </div>
-      </nav>
+      <Navbar/>
 
-      <div style={s.page}>
+      <PageWrapper>
         <div style={s.headerRow}>
           <h2 style={s.heading}>My Groups</h2>
           <button style={s.addBtn} onClick={() => setShowForm(true)}>+ New group</button>
@@ -92,7 +87,7 @@ export default function GroupsPage() {
             ))}
           </div>
         )}
-      </div>
+      </PageWrapper>
 
       {showForm && (
         <div style={s.overlay} onClick={() => setShowForm(false)}>

@@ -168,7 +168,7 @@ export default function ExpensesPage() {
     <div>
       <Navbar/>
 
-      <PageWrapper/>
+      <PageWrapper>
         {/* Summary cards */}
         {summary && (
           <div style={s.summaryRow}>
@@ -244,7 +244,7 @@ export default function ExpensesPage() {
             ))}
           </div>
         )}
-      </div>
+      </PageWrapper>
 
       {/* Add / Edit modal */}
       {showForm && (
