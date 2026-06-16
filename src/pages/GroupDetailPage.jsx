@@ -2,10 +2,9 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth } from '../context/AuthContext';
-import {
-  getGroup, addMember, getExpenses, addExpense,
-  deleteExpense, getBalances, markSettled
-} from '../services/groupService';
+import {getGroup, addMember, getExpenses, addExpense,deleteExpense, getBalances, markSettled} from '../services/groupService';
+import Navbar from '../components/Navbar';
+import PageWrapper from '../components/PageWrapper';
 
 const TABS = ['Expenses', 'Balances', 'Members'];
 
@@ -140,15 +139,9 @@ export default function GroupDetailPage() {
 
   return (
     <div>
-      <nav style={s.nav}>
-        <span style={s.brand} onClick={() => navigate('/dashboard')} role="button">FinSplit</span>
-        <div style={s.navLinks}>
-          <span style={s.navLink} onClick={() => navigate('/groups')}>← Groups</span>
-          <button style={s.logoutBtn} onClick={handleLogout}>Logout</button>
-        </div>
-      </nav>
+      <Navbar/>
 
-      <div style={s.page}>
+      <PageWrapper>
         {/* Group header */}
         <div style={s.groupHeader}>
           <div style={s.groupAvatar}>{group.name.charAt(0).toUpperCase()}</div>
@@ -308,52 +301,9 @@ export default function GroupDetailPage() {
             </div>
           </div>
         )}
-      </div>
+      </PageWrapper>
 
       {/* Add expense modal */}
-      {/* {showExpForm && (
-        <div style={s.overlay} onClick={() => setShowExpForm(false)}>
-          <div style={s.modal} onClick={e => e.stopPropagation()}>
-            <h3 style={s.modalTitle}>Add group expense</h3>
-            <form onSubmit={handleAddExpense}>
-              <label style={s.label}>Amount (₹)</label>
-              <input style={s.input} type="number" step="0.01" min="0.01"
-                placeholder="0.00" value={expForm.amount}
-                onChange={e => setExpForm(f => ({ ...f, amount: e.target.value }))} />
-
-              <label style={s.label}>Description</label>
-              <input style={s.input} type="text" placeholder="e.g. Hotel booking"
-                value={expForm.description}
-                onChange={e => setExpForm(f => ({ ...f, description: e.target.value }))} />
-
-              <label style={s.label}>Date</label>
-              <input style={s.input} type="date" value={expForm.date}
-                onChange={e => setExpForm(f => ({ ...f, date: e.target.value }))} />
-
-              <label style={s.label}>Split type</label>
-              <select style={s.input} value={expForm.splitType}
-                onChange={e => setExpForm(f => ({ ...f, splitType: e.target.value }))}>
-                <option value="EQUAL">Equal split</option>
-                <option value="CUSTOM">Custom split</option>
-              </select>
-
-              {expForm.splitType === 'CUSTOM' && (
-                <p style={{ fontSize:12, color:'#9ca3af', marginTop:6 }}>
-                  Custom split amounts can be set via the API for now.
-                </p>
-              )}
-
-              <div style={{ display:'flex', gap:10, marginTop:16 }}>
-                <button type="submit" style={s.addBtn} disabled={submittingExp}>
-                  {submittingExp ? 'Adding...' : 'Add expense'}
-                </button>
-                <button type="button" style={s.cancelBtn}
-                  onClick={() => setShowExpForm(false)}>Cancel</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )} */}
       {showExpForm && (
         <div style={s.overlay} onClick={() => setShowExpForm(false)}>
             <div style={{ ...s.modal, maxWidth: 480 }} onClick={e => e.stopPropagation()}>

@@ -13,6 +13,7 @@ import ExpensesPage from './pages/ExpensesPage';
 import BudgetPage from './pages/BudgetPage';
 import GroupsPage from './pages/GroupsPage';
 import GroupDetailPage from './pages/GroupDetailPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 export default function App() {
   return (
@@ -37,7 +38,7 @@ export default function App() {
           <Route path="/groups/:groupId" element={
             <ProtectedRoute><GroupDetailPage /></ProtectedRoute>
           } />
-          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          <Route path="*" element={<NotFoundPage/>} />
         </Routes>
 
         <ToastContainer position="top-right" autoClose={3000} />
