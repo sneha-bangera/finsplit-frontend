@@ -7,6 +7,10 @@ import {
 } from '../services/expenseService';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import api from '../services/api';
+import Navbar from '../components/Navbar';
+import PageWrapper from '../components/PageWrapper';
+
 
 const ICON_MAP = {
   food:'🍔', transport:'🚗', shopping:'🛍️', entertainment:'🎬',
@@ -127,6 +131,16 @@ export default function ExpensesPage() {
     }
   };
 
+  const handleViewReceipt = async (exp) => {
+    try {
+      const response = await api.get(exp.receiptUrl, { responseType: 'blob' });
+      const blobUrl  = URL.createObjectURL(response.data);
+      setReceiptPreview({ url: blobUrl, expenseId: exp.id });
+    } catch {
+      toast.error('Could not load receipt');
+    }
+  };
+
   const handleExport = async () => {
     setExporting(true);
     try {
@@ -152,17 +166,9 @@ export default function ExpensesPage() {
 
   return (
     <div>
-      <nav style={s.nav}>
-        <span style={s.brand} onClick={() => navigate('/dashboard')} role="button">FinSplit</span>
-        <div style={s.navLinks}>
-          <span style={s.navActive}>Expenses</span>
-          <span style={s.navLink} onClick={() => navigate('/budgets')}>Budgets</span>
-          <span style={s.navLink} onClick={() => navigate('/groups')}>Groups</span>
-          <button style={s.logoutBtn} onClick={handleLogout}>Logout</button>
-        </div>
-      </nav>
+      <Navbar/>
 
-      <div style={s.page}>
+      <PageWrapper/>
         {/* Summary cards */}
         {summary && (
           <div style={s.summaryRow}>
@@ -221,10 +227,7 @@ export default function ExpensesPage() {
                   {/* Receipt button */}
                   {exp.receiptUrl ? (
                     <button style={s.receiptBtn}
-                      onClick={() => setReceiptPreview({
-                        url: `http://localhost:8080${exp.receiptUrl}`,
-                        expenseId: exp.id
-                      })}>
+                      onClick={() => handleViewReceipt(exp)}>
                       🧾 View
                     </button>
                   ) : (
@@ -294,9 +297,17 @@ export default function ExpensesPage() {
               onError={() => toast.error('Could not load receipt image')}
             />
             <div style={{ marginTop:12 }}>
-              <button style={s.cancelBtn} onClick={() => setReceiptPreview(null)}>
+              <button style={s.cancelBtn} onClick={() => {
+                if (receiptPreview?.url?.startsWith('blob:')) {
+                  URL.revokeObjectURL(receiptPreview.url);
+                }
+                setReceiptPreview(null);
+                }}>
                 Close
               </button>
+              {/* <button style={s.cancelBtn} onClick={() => setReceiptPreview(null)}>
+                Close
+              </button> */}
             </div>
           </div>
         </div>
